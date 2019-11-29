@@ -38,10 +38,10 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 def loading_model(path):
     
     # returning the pretrained resnet18 model
-    model_ft = models.resnet18(pretrained=True)
+    model_ft = models.resnet50(pretrained=True)
     num_ftrs = model_ft.fc.in_features
     model_ft.fc = nn.Linear(num_ftrs, 10)
-    model_ft.load_state_dict(torch.load(path, map_location=torch.device('cpu')))
+    model_ft.load_state_dict(torch.load(path, device))
     return model_ft
 
 
